@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jaga Kampung</string>
+    <string name="tagline">Suarakan lingkunganmu</string>
+    <string name="masuk">Masuk</string>
+    <string name="email">Email</string>
+    <string name="sandi">Kata sandi</string>
+    <string name="belum_punya_akun">Belum punya akun? Daftar sekarang</string>
+    <string name="selamat_datang">Selamat datang, Rizal</string>
+    <string name="sub_home">Laporan lingkungan RT kamu</string>
+    <string name="buat_laporan">Buat laporan</string>
+</resources>

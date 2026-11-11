@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal_primary">#10766B</color>
+    <color name="teal_dark">#0E766D</color>
+    <color name="teal_soft">#48938E</color>
+    <color name="teal_light">#D9EAE8</color>
+    <color name="accent">#FBB315</color>
+    <color name="background">#F4F7FC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#444853</color>
+    <color name="text_secondary">#4E525D</color>
+    <color name="divider">#E8EDF3</color>
+    <color name="status_dilaporkan">#9E9E9E</color>
+    <color name="status_ditinjau">#F2B233</color>
+    <color name="status_diproses">#3B82F6</color>
+    <color name="status_selesai">#2E9E5B</color>
+    <color name="white">#FFFFFF</color>
+</resources>
