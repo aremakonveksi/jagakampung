@@ -1,4 +1,4 @@
-# LaporWarga
+# Jaga Kampung
 
 Aplikasi Android pelaporan keluhan warga satu RT (proyek final Workshop Pemrograman Aplikasi Mobile).
 
@@ -40,7 +40,8 @@ tanggapan/{laporanId}/{tanggapanId}
 ## Cara Kerja Git (untuk Teman A & B — tinggal pakai)
 
 1. Unduh GitHub Desktop: https://desktop.github.com
-2. Repository > Clone Repository > tab URL > masukkan link repo yang Rizal kirim.
+2. Repository > Clone Repository > tab URL > masukkan link repo yang Rizal kirim:
+   https://github.com/aremakonveksi/jagakampung
 3. Buat branch: Branch > New Branch > nama: `fitur-<namamu>` (mis. `fitur-andi`).
 4. Kerjakan perubahan, lalu commit (tulis apa yang berubah).
 5. Push origin, lalu buka Pull Request di github.com — tunggu review.
