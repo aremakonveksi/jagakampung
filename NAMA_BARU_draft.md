@@ -26,6 +26,8 @@ Top-3 Claude: **Guyub RT** (rekomendasi), Pantau RT, Peka.
 Catatan: cek Play Store/Google sebelum final (ketersediaan nama belum diverifikasi siapa pun).
 
 ## Status
-- Mockup portrait 2 gaya (A teal modern / B indigo bold) sudah dibuat Claude: 20 frame.
-- Screenshot: C:\Users\user\Downloads\MockupClaude (kanvas_penuh, gayaA_tajam, gayaB_tajam).
-- Menunggu keputusan user: nama final + gaya final -> lanjut rename repo & update aset.
+- NAMA FINAL: **Jaga Kampung** (pilihan user, 11 Nov 2026). Cek web: tidak ada app Android bernama sama.
+- Repo direname: github.com/aremakonveksi/jagakampung (redirect otomatis); remote lokal sudah diarahkan; README di-commit+push (1659290).
+- Putaran 6 SELESAI: Claude ganti nama di mockup (splash A+B), diagram (PDF baru 11 hal: Jagakampung-Alur-Proyek), README Info teknis (package com.kelompokX.jagakampung), Sesi-0, ZIP paket. Judul tab artifact terverifikasi berubah ke "Mockup Jaga Kampung".
+- GAYA FINAL: **Gaya A (teal modern bersih)** (pilihan user, 11 Nov 2026) — "nyaman, tidak merusak mata".
+- Chrome automation 9955 dihidupkan ulang (user mau melihat mockup) — JANGAN ditutup sebelum user selesai menilai.

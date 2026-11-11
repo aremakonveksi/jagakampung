@@ -37,6 +37,11 @@ laporanFoto/{laporanId}
 tanggapan/{laporanId}/{tanggapanId}
   uidAdmin, teks, statusBaru, dibuatPada
 
+## Dokumen Proyek
+- docs/RENCANA_SESI0.md — langkah hari pertama per orang + urutan merge + cara ganti package
+- desain/GayaA/DESIGN_TOKENS.md + desain/GayaA/colors.xml — warna/font/bentuk Gaya A (terpilih)
+- firebase/database.rules.json — aturan keamanan Realtime Database (tanpa kondisi waktu, anti-lockout)
+
 ## Cara Kerja Git (untuk Teman A & B — tinggal pakai)
 
 1. Unduh GitHub Desktop: https://desktop.github.com
