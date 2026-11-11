@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Jaga Kampung - Tema Gaya A. Butuh dependensi:
+         implementation "com.google.android.material:material:1.11.0" -->
+    <style name="Theme.JagaKampung" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/teal_primary</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">@color/teal_light</item>
+        <item name="colorOnPrimaryContainer">@color/teal_dark</item>
+        <item name="colorSecondary">@color/teal_soft</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/teal_dark</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+    </style>
+</resources>

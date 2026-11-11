@@ -3,11 +3,12 @@
     ".read": false,
     ".write": false,
     "users": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('peran').val() === 'admin' || root.child('users').child(auth.uid).child('status').val() === 'approved')",
       "$uid": {
         ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('peran').val() === 'admin')",
         ".write": "auth != null && auth.uid === $uid && !data.exists()",
         ".validate": "newData.hasChildren(['nama','email','peran','status'])",
-        "nama": { ".validate": "newData.val() is string && newData.val().length <= 60" },
+        "nama": { ".validate": "newData.val() is string && newData.val().length > 0 && newData.val().length <= 60" },
         "email": { ".validate": "newData.val() is string && newData.val().length <= 120" },
         "rt": { ".validate": "newData.val() is string" },
         "rw": { ".validate": "newData.val() is string" },
@@ -16,12 +17,11 @@
           ".validate": "newData.val() === 'warga'"
         },
         "status": {
-          ".write": "auth != null && (!data.exists() && auth.uid === $uid || root.child('users').child(auth.uid).child('peran').val() === 'admin')",
+          ".write": "auth != null && ((auth.uid === $uid && !data.exists()) || root.child('users').child(auth.uid).child('peran').val() === 'admin')",
           ".validate": "newData.val() === 'pending' || newData.val() === 'approved' || newData.val() === 'rejected'"
         },
         "dibuatPada": { ".validate": "newData.val() is number" },
-        "alasanTolak": { ".validate": "newData.val() is string" },
-        "$other": { ".validate": false }
+        "alasanTolak": { ".validate": "newData.val() is string" }
       }
     },
     "laporan": {
@@ -30,12 +30,13 @@
         ".read": "auth != null && root.child('users').child(auth.uid).child('status').val() === 'approved'",
         ".create": "auth != null && root.child('users').child(auth.uid).child('status').val() === 'approved' && newData.child('uidPelapor').val() === auth.uid && newData.child('status').val() === 'dilaporkan'",
         ".update": "auth != null && (root.child('users').child(auth.uid).child('peran').val() === 'admin' || (newData.child('uidPelapor').val() === auth.uid && data.child('status').val() === 'dilaporkan'))",
+        ".delete": "auth != null && root.child('users').child(auth.uid).child('peran').val() === 'admin'",
         ".validate": "newData.hasChildren(['uidPelapor','judul','deskripsi','kategori','status'])",
         "uidPelapor": { ".validate": "newData.val() === auth.uid" },
         "namaPelapor": { ".validate": "newData.val() is string" },
         "judul": { ".validate": "newData.val() is string && newData.val().length >= 3 && newData.val().length <= 100" },
         "deskripsi": { ".validate": "newData.val() is string && newData.val().length <= 2000" },
-        "kategori": { ".validate": "newData.val() is string" },
+        "kategori": { ".validate": "newData.val() is string && newData.val().length <= 40" },
         "alamatTeks": { ".validate": "newData.val() is string" },
         "lat": { ".validate": "newData.val() is number" },
         "lng": { ".validate": "newData.val() is number" },
@@ -43,16 +44,14 @@
           ".validate": "newData.val() === 'dilaporkan' || newData.val() === 'ditinjau' || newData.val() === 'diproses' || newData.val() === 'selesai'"
         },
         "dibuatPada": { ".validate": "newData.val() is number" },
-        "diperbaruiPada": { ".validate": "newData.val() is number" },
-        "$other": { ".validate": false }
+        "diperbaruiPada": { ".validate": "newData.val() is number" }
       }
     },
     "laporanFoto": {
       "$id": {
         ".read": "auth != null && root.child('users').child(auth.uid).child('status').val() === 'approved'",
-        ".write": "auth != null && root.child('users').child(auth.uid).child('status').val() === 'approved' && (!data.exists())",
-        ".validate": "newData.isString() && newData.val().length <= 1000000",
-        "$other": { ".validate": false }
+        ".write": "auth != null && root.child('users').child(auth.uid).child('status').val() === 'approved' && !data.exists()",
+        ".validate": "newData.isString() && newData.val().length <= 1000000"
       }
     },
     "tanggapan": {
@@ -66,8 +65,7 @@
           "statusBaru": {
             ".validate": "newData.val() === 'ditinjau' || newData.val() === 'diproses' || newData.val() === 'selesai'"
           },
-          "dibuatPada": { ".validate": "newData.val() is number" },
-          "$other": { ".validate": false }
+          "dibuatPada": { ".validate": "newData.val() is number" }
         }
       }
     }

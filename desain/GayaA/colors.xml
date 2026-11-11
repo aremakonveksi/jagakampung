@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Jaga Kampung - Gaya A (teal modern bersih) -->
-    <!-- CATATAN: nilai warna ini adalah basis kerja Gaya A. Wajib dikoreksi ke heks final
-         dari kanvas mockup Claude begitu limit Claude reset (16:20) -> lihat TODO di bawah. -->
-    <!-- TODO(CLAUDE-CHECK): samakan heks dengan nilai asli di kanvas Mockup Gaya A -->
-    <color name="teal_primary">#2A9D8F</color>
-    <color name="teal_dark">#1F7A70</color>
-    <color name="teal_light">#D8F3EF</color>
-    <color name="accent">#F4A261</color>
-    <color name="background">#F5F7F6</color>
+    <!-- Nilai teal/teks/latar diukur langsung dari kanvas "Mockup Jaga Kampung" (Gaya A). -->
+
+    <color name="teal_primary">#10766B</color>
+    <color name="teal_dark">#0E766D</color>
+    <color name="teal_soft">#48938E</color>
+    <color name="teal_light">#D9EAE8</color>
+    <color name="accent">#FBB315</color>
+    <color name="background">#F4F7FC</color>
     <color name="surface">#FFFFFF</color>
-    <color name="text_primary">#1C2B2A</color>
-    <color name="text_secondary">#5C6B69</color>
-    <color name="divider">#E3E8E7</color>
+    <color name="text_primary">#444853</color>
+    <color name="text_secondary">#4E525D</color>
+    <color name="divider">#E8EDF3</color>
 
     <!-- Warna STATUS LAPORAN -->
     <color name="status_dilaporkan">#9E9E9E</color>
@@ -21,7 +21,7 @@
     <color name="status_selesai">#2E9E5B</color>
 
     <!-- Warna STATUS AKUN -->
-    <color name="status_pending">#F2B233</color>
+    <color name="status_pending">#FBB315</color>
     <color name="status_approved">#2E9E5B</color>
     <color name="status_rejected">#E5484D</color>
 </resources>
