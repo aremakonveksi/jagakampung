@@ -1,6 +1,7 @@
 package com.jagakampung.demo.admin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -18,15 +19,24 @@ import java.util.List;
 
 public class DaftarLaporanActivity extends Activity {
 
+    // Foto contoh (gambar kecil dalam bentuk teks Base64)
+    private static final String FOTO_CONTOH =
+            "iVBORw0KGgoAAAANSUhEUgAAAKAAAABkCAIAAACO1KzYAAAA1klEQVR42u3RSw3CUBQA0SehsvBy95Q2fBywwTA2mslJRsGctd1H4ZYFgAVYgAVYgAVYgAGrA7yPwgEGLMACLMACLMACDFgh4McoHGDAAizAAizAAizAgBUCPkbhAAMWYAEWYAEWYAEGrBDwOQq3br+vwgEGLMACLMACLMACDFiABViABViABRiwAAuwLge8PUfhAAMWYAEWYAEWYAEGrBDwaxQOMGABFmABFmABFmDACgG/R+EAAxZgARZgARZgAQasEPBnFA4wYAEWYAEWYAEWYMDK9AfjKE7QIxskVQAAAABJRU5ErkJggg==";
+
     // Satu data laporan (field sama dengan di Firebase)
     static class Laporan {
-        String id, judul, kategori, status;
+        String id, judul, kategori, status, deskripsi, alamat, pelapor, fotoBase64;
 
-        Laporan(String id, String judul, String kategori, String status) {
+        Laporan(String id, String judul, String kategori, String status,
+                String deskripsi, String alamat, String pelapor, String fotoBase64) {
             this.id = id;
             this.judul = judul;
             this.kategori = kategori;
             this.status = status;
+            this.deskripsi = deskripsi;
+            this.alamat = alamat;
+            this.pelapor = pelapor;
+            this.fotoBase64 = fotoBase64;
         }
     }
 
@@ -38,13 +48,36 @@ public class DaftarLaporanActivity extends Activity {
         setContentView(R.layout.activity_daftar_laporan);
 
         // DATA CONTOH. Nanti bagian ini diganti dengan data dari Firebase.
-        daftar.add(new Laporan("1", "Lampu jalan mati", "Infrastruktur", "dilaporkan"));
-        daftar.add(new Laporan("2", "Sampah menumpuk di gang 3", "Kebersihan", "ditinjau"));
-        daftar.add(new Laporan("3", "Selokan tersumbat", "Infrastruktur", "diproses"));
-        daftar.add(new Laporan("4", "Pos ronda rusak", "Keamanan", "selesai"));
+        daftar.add(new Laporan("1", "Lampu jalan mati", "Infrastruktur", "dilaporkan",
+                "Lampu jalan di depan rumah nomor 12 sudah mati tiga hari, jalan jadi gelap.",
+                "Gang 3, RT 02 / RW 05", "Budi Santoso", FOTO_CONTOH));
+        daftar.add(new Laporan("2", "Sampah menumpuk di gang 3", "Kebersihan", "ditinjau",
+                "Sampah belum diangkut seminggu dan mulai berbau.",
+                "Gang 3, RT 02 / RW 05", "Siti Aminah", ""));
+        daftar.add(new Laporan("3", "Selokan tersumbat", "Infrastruktur", "diproses",
+                "Selokan di samping pos ronda tersumbat, air meluap saat hujan.",
+                "Dekat pos ronda, RT 03 / RW 05", "Agus Prasetyo", ""));
+        daftar.add(new Laporan("4", "Pos ronda rusak", "Keamanan", "selesai",
+                "Atap pos ronda bocor dan papan lantainya lapuk.",
+                "Pos ronda RT 03", "Dewi Lestari", ""));
 
         ListView list = findViewById(R.id.listLaporan);
         list.setAdapter(new LaporanAdapter());
+
+        // Ketuk kartu -> buka halaman detail
+        list.setOnItemClickListener((parent, view, position, id) -> {
+            Laporan l = daftar.get(position);
+            Intent i = new Intent(DaftarLaporanActivity.this, DetailLaporanActivity.class);
+            i.putExtra("id", l.id);
+            i.putExtra("judul", l.judul);
+            i.putExtra("kategori", l.kategori);
+            i.putExtra("status", l.status);
+            i.putExtra("deskripsi", l.deskripsi);
+            i.putExtra("alamat", l.alamat);
+            i.putExtra("pelapor", l.pelapor);
+            i.putExtra("foto", l.fotoBase64);
+            startActivity(i);
+        });
     }
 
     // Warna status sesuai desain Rizal (colors.xml Gaya A)
