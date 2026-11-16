@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jagakampung.demo.R;
+import com.jagakampung.app.R;
 
 public class DashboardActivity extends Activity {
 
