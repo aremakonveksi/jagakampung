@@ -15,27 +15,27 @@ Modul admin (Rizqi) ada di folder `modul_admin/`. Ini ringkasan supaya mudah dig
 
 ## Cara menggabungkan
 
-1. Salin `java/*.java` ke `app/src/main/java/com/jagakampung/demo/admin/`
+1. Salin `java/*.java` ke `app/src/main/java/com/jagakampung/app/admin/`
 2. Salin `res/layout/*.xml` ke `app/src/main/res/layout/`
 3. Salin `res/drawable/bg_card_laporan.xml` ke `app/src/main/res/drawable/`
 4. Tambahkan di `AndroidManifest.xml`, di dalam `<application>`:
 
 ```xml
-<activity android:name="com.jagakampung.demo.admin.DashboardActivity" android:exported="false" />
-<activity android:name="com.jagakampung.demo.admin.DaftarLaporanActivity" android:exported="false" />
-<activity android:name="com.jagakampung.demo.admin.DetailLaporanActivity" android:exported="false" />
-<activity android:name="com.jagakampung.demo.admin.VerifikasiAkunActivity" android:exported="false" />
+<activity android:name="com.jagakampung.app.admin.DashboardActivity" android:exported="false" />
+<activity android:name="com.jagakampung.app.admin.DaftarLaporanActivity" android:exported="false" />
+<activity android:name="com.jagakampung.app.admin.DetailLaporanActivity" android:exported="false" />
+<activity android:name="com.jagakampung.app.admin.VerifikasiAkunActivity" android:exported="false" />
 ```
 
 5. Dari layar beranda/login, kalau `users/{uid}/peran == "admin"`, buka dashboard:
 
 ```java
-startActivity(new Intent(this, com.jagakampung.demo.admin.DashboardActivity.class));
+startActivity(new Intent(this, com.jagakampung.app.admin.DashboardActivity.class));
 ```
 
 ## Yang perlu dicatat
 
-- Package: `com.jagakampung.demo.admin`. Memakai `com.jagakampung.demo.R`.
+- Package: `com.jagakampung.app.admin` (sama dengan `namespace` di `app/build.gradle.kts`). Memakai `com.jagakampung.app.R`.
 - Memakai `android.app.Activity` biasa, tanpa tambahan library.
 - Warna mengikuti `desain/GayaA/colors.xml` (ditulis langsung sebagai kode hex).
 - **Semua data masih contoh** (ditulis langsung di kode, ada komentar "DATA CONTOH"). Belum tersambung Firebase.
@@ -43,7 +43,7 @@ startActivity(new Intent(this, com.jagakampung.demo.admin.DashboardActivity.clas
 
 ## Yang perlu dari Rizal
 
-1. Proyek sudah disambungkan ke Firebase (`google-services.json` + dependency Realtime Database)? `app-demo` di repo belum punya `build.gradle`.
+1. Firebase Auth + Database sudah ada di `app/build.gradle.kts`. Kapan tim siap menyambungkan layar admin ke data asli (`laporan`, `laporanFoto`, `tanggapan`, `users`)?
 2. Akun admin pertama dibuat manual di Firebase Console.
 3. Status laporan **"ditolak"** belum diizinkan di `database.rules.json` (untuk `laporan/status` maupun `tanggapan/statusBaru`). Mau ditambah, atau cukup 4 status?
 4. Aturan `laporan` memakai `.create`, `.update`, `.delete`. Setahu Rizqi, Realtime Database hanya mengenal `.read`, `.write`, `.validate`. Mohon dites apakah admin benar-benar bisa mengubah status laporan.
