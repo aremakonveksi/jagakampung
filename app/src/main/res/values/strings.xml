@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Jaga Kampung</string>
+    <string name="tagline">Suarakan lingkunganmu</string>
+    <string name="email">Email</string>
+    <string name="sandi">Kata sandi</string>
+    <string name="nama">Nama lengkap</string>
+    <string name="rt">RT</string>
+    <string name="rw">RW</string>
+    <string name="masuk">Masuk</string>
+    <string name="daftar">Daftar</string>
+    <string name="belum_punya_akun">Belum punya akun? Daftar sekarang</string>
+    <string name="sudah_punya_akun">Sudah punya akun? Masuk</string>
+    <string name="selamat_datang">Selamat datang, %1$s</string>
+    <string name="sub_home">Laporan lingkungan RT kamu</string>
+    <string name="logout">Keluar</string>
+
+    <string name="judul_masuk">Masuk ke akunmu</string>
+    <string name="judul_daftar">Buat akun warga</string>
+    <string name="email_tidak_valid">Format email tidak valid</string>
+    <string name="sandi_min_enam">Kata sandi minimal 6 karakter</string>
+    <string name="nama_min_tiga">Nama minimal 3 karakter</string>
+    <string name="rt_wajib">RT wajib diisi</string>
+    <string name="rw_wajib">RW wajib diisi</string>
+    <string name="gagal_masuk">Login gagal. Email atau kata sandi salah. Periksa kembali lalu coba lagi.</string>
+    <string name="memeriksa_akun">Masih memeriksa akun… Periksa koneksi internet.</string>
+    <string name="login_timeout">Server belum merespons. Periksa koneksi lalu coba lagi.</string>
+    <string name="gagal_koneksi">Tidak ada koneksi internet. Periksa jaringan lalu coba lagi.</string>
+    <string name="gagal_daftar">Gagal mendaftar</string>
+    <string name="daftar_berhasil">Pendaftaran berhasil. Akun menunggu verifikasi admin.</string>
+
+    <string name="status_pending">Menunggu verifikasi</string>
+    <string name="status_approved">Terverifikasi</string>
+    <string name="status_rejected">Ditolak</string>
+    <string name="akun_menunggu">Akun kamu sedang menunggu verifikasi admin RT/RW.</string>
+    <string name="akun_ditolak">Pendaftaran akun kamu ditolak.</string>
+    <string name="akun_ditolak_alasan">Pendaftaran ditolak: %1$s</string>
+</resources>
