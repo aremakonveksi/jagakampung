@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#FBB315</color>
+    <color name="background">#F4F7FC</color>
+    <color name="divider">#E8EDF3</color>
+    <color name="status_approved">#2E9E5B</color>
+    <color name="status_pending">#FBB315</color>
+    <color name="status_rejected">#E5484D</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="teal_dark">#0E766D</color>
+    <color name="teal_light">#D9EAE8</color>
+    <color name="teal_primary">#10766B</color>
+    <color name="teal_soft">#48938E</color>
+    <color name="text_primary">#444853</color>
+    <color name="text_secondary">#4E525D</color>
+    <color name="white">#FFFFFF</color>
+    <string name="akun_ditolak">Pendaftaran akun kamu ditolak.</string>
+    <string name="akun_ditolak_alasan">Pendaftaran ditolak: %1$s</string>
+    <string name="akun_menunggu">Akun kamu sedang menunggu verifikasi admin RT/RW.</string>
+    <string name="app_name">Jaga Kampung</string>
+    <string name="belum_punya_akun">Belum punya akun? Daftar sekarang</string>
+    <string name="daftar">Daftar</string>
+    <string name="daftar_berhasil">Pendaftaran berhasil. Akun menunggu verifikasi admin.</string>
+    <string name="default_web_client_id" translatable="false">1095858172657-4ql7752hhbhoqj7ugn31alu2hfpohqbu.apps.googleusercontent.com</string>
+    <string name="email">Email</string>
+    <string name="email_tidak_valid">Format email tidak valid</string>
+    <string name="firebase_database_url" translatable="false">https://jagakampung-p11-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gagal_daftar">Gagal mendaftar</string>
+    <string name="gagal_koneksi">Tidak ada koneksi internet. Periksa jaringan lalu coba lagi.</string>
+    <string name="gagal_masuk">Login gagal. Email atau kata sandi salah. Periksa kembali lalu coba lagi.</string>
+    <string name="gcm_defaultSenderId" translatable="false">1095858172657</string>
+    <string name="google_api_key" translatable="false">AIzaSyDUu8vR24HvWq26rgYa_vxCLvvHi0uEmMw</string>
+    <string name="google_app_id" translatable="false">1:1095858172657:android:cb043c9b2d59ffae616f50</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDUu8vR24HvWq26rgYa_vxCLvvHi0uEmMw</string>
+    <string name="google_storage_bucket" translatable="false">jagakampung-p11.firebasestorage.app</string>
+    <string name="judul_daftar">Buat akun warga</string>
+    <string name="judul_masuk">Masuk ke akunmu</string>
+    <string name="login_timeout">Server belum merespons. Periksa koneksi lalu coba lagi.</string>
+    <string name="logout">Keluar</string>
+    <string name="masuk">Masuk</string>
+    <string name="memeriksa_akun">Masih memeriksa akun… Periksa koneksi internet.</string>
+    <string name="nama">Nama lengkap</string>
+    <string name="nama_min_tiga">Nama minimal 3 karakter</string>
+    <string name="project_id" translatable="false">jagakampung-p11</string>
+    <string name="rt">RT</string>
+    <string name="rt_wajib">RT wajib diisi</string>
+    <string name="rw">RW</string>
+    <string name="rw_wajib">RW wajib diisi</string>
+    <string name="sandi">Kata sandi</string>
+    <string name="sandi_min_enam">Kata sandi minimal 6 karakter</string>
+    <string name="selamat_datang">Selamat datang, %1$s</string>
+    <string name="status_approved">Terverifikasi</string>
+    <string name="status_pending">Menunggu verifikasi</string>
+    <string name="status_rejected">Ditolak</string>
+    <string name="sub_home">Laporan lingkungan RT kamu</string>
+    <string name="sudah_punya_akun">Sudah punya akun? Masuk</string>
+    <string name="tagline">Suarakan lingkunganmu</string>
+    <style name="Theme.JagaKampung" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/teal_primary</item>
+        <item name="colorPrimaryDark">@color/teal_dark</item>
+        <item name="colorAccent">@color/teal_primary</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+        <item name="android:statusBarColor">@color/teal_dark</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+    </style>
+</resources>

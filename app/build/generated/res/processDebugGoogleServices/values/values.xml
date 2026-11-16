@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">1095858172657-4ql7752hhbhoqj7ugn31alu2hfpohqbu.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://jagakampung-p11-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">1095858172657</string>
+    <string name="google_api_key" translatable="false">AIzaSyDUu8vR24HvWq26rgYa_vxCLvvHi0uEmMw</string>
+    <string name="google_app_id" translatable="false">1:1095858172657:android:cb043c9b2d59ffae616f50</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDUu8vR24HvWq26rgYa_vxCLvvHi0uEmMw</string>
+    <string name="google_storage_bucket" translatable="false">jagakampung-p11.firebasestorage.app</string>
+    <string name="project_id" translatable="false">jagakampung-p11</string>
+</resources>
