@@ -1,4 +1,4 @@
-package com.jagakampung.demo.admin;
+package com.jagakampung.app.admin;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.jagakampung.demo.R;
+import com.jagakampung.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
