@@ -1,4 +1,4 @@
-package com.jagakampung.demo.admin;
+package com.jagakampung.app.admin;
 
 import android.app.Activity;
 import android.content.Intent;
