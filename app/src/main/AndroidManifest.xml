@@ -21,7 +21,12 @@
         </activity>
 
         <activity android:name=".SignupActivity" android:exported="false" />
-        <activity android:name=".HomeActivity" android:exported="false" />
-    </application>
+                <activity android:name=".HomeActivity" android:exported="false" />
+
+                <activity android:name=".admin.DashboardActivity" android:exported="false" />
+                <activity android:name=".admin.DaftarLaporanActivity" android:exported="false" />
+                <activity android:name=".admin.DetailLaporanActivity" android:exported="false" />
+                <activity android:name=".admin.VerifikasiAkunActivity" android:exported="false" />
+            </application>
 
 </manifest>

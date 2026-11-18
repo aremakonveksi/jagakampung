@@ -112,8 +112,31 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void bukaHome() {
-        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-        finish();
+        FirebaseUser aktif = auth.getCurrentUser();
+        if (aktif == null) {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+            return;
+        }
+        // Arahkan sesuai peran: admin -> Dashboard, warga -> Home.
+        // Jika pembacaan gagal (mis. offline), aman jatuh ke Home.
+        com.google.firebase.database.FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(aktif.getUid())
+                .child("peran")
+                .get()
+                .addOnCompleteListener(this, task -> {
+                    String peran = null;
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        peran = task.getResult().getValue(String.class);
+                    }
+                    Intent next = "admin".equals(peran)
+                            ? new Intent(LoginActivity.this,
+                                    com.jagakampung.app.admin.DashboardActivity.class)
+                            : new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(next);
+                    finish();
+                });
     }
 
     @Override
