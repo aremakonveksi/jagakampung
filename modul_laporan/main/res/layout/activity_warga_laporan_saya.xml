@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lp_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        style="@style/LpJudulHalaman"
+        android:text="Laporan Saya" />
+
+    <TextView
+        style="@style/LpSubJudul"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="Riwayat dan status laporanmu" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLaporan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvKosong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Belum ada laporan.\nTekan tombol di bawah untuk membuat laporan."
+            android:textColor="@color/lp_subtext"
+            android:textSize="15sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBuat"
+        style="@style/LpTombol"
+        android:layout_marginTop="12dp"
+        android:text="+  Buat laporan" />
+</LinearLayout>

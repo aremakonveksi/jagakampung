@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lp_bg">#F4F7FC</color>
+    <color name="lp_primary">#12766A</color>
+    <color name="lp_text">#2D3340</color>
+    <color name="lp_subtext">#5B6270</color>
+    <color name="lp_input">#E8ECF4</color>
+    <color name="lp_hint">#8A91A0</color>
+    <color name="lp_white">#FFFFFF</color>
+
+    <color name="lp_st_dilaporkan_fg">#8A8F98</color>
+    <color name="lp_st_dilaporkan_bg">#F0F1F3</color>
+    <color name="lp_st_ditinjau_fg">#F0A422</color>
+    <color name="lp_st_ditinjau_bg">#FFF4DE</color>
+    <color name="lp_st_diproses_fg">#3B7DE0</color>
+    <color name="lp_st_diproses_bg">#E8F0FD</color>
+    <color name="lp_st_selesai_fg">#2E9E5B</color>
+    <color name="lp_st_selesai_bg">#E4F4EA</color>
+    <color name="lp_overlay">#00FFFFFF</color>
+</resources>
