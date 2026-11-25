@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.jagakampung.app.LoginActivity;
 import com.jagakampung.app.R;
 
 public class DashboardActivity extends Activity {
@@ -69,6 +71,18 @@ public class DashboardActivity extends Activity {
         btnVerifikasi.setTextColor(TEAL);
         btnVerifikasi.setOnClickListener(v ->
                 startActivity(new Intent(this, VerifikasiAkunActivity.class)));
+
+        // Tombol Keluar: putuskan login, lalu kembali ke layar Masuk
+        Button btnKeluar = findViewById(R.id.btnKeluar);
+        btnKeluar.setBackgroundColor(Color.TRANSPARENT);
+        btnKeluar.setTextColor(Color.parseColor("#E5484D"));
+        btnKeluar.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            Intent masuk = new Intent(this, LoginActivity.class);
+            masuk.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(masuk);
+            finish();
+        });
     }
 
     // Satu baris per kategori: nama + angka + batang proporsional
