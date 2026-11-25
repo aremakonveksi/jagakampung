@@ -13,35 +13,23 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.jagakampung.app.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DaftarLaporanActivity extends Activity {
 
-    private static final int REQ_DETAIL = 1;
-
-    // Foto contoh (gambar kecil dalam bentuk teks Base64)
-    private static final String FOTO_CONTOH =
-            "iVBORw0KGgoAAAANSUhEUgAAAKAAAABkCAIAAACO1KzYAAAA1klEQVR42u3RSw3CUBQA0SehsvBy95Q2fBywwTA2mslJRsGctd1H4ZYFgAVYgAVYgAVYgAGrA7yPwgEGLMACLMACLMACDFgh4McoHGDAAizAAizAAizAgBUCPkbhAAMWYAEWYAEWYAEGrBDwOQq3br+vwgEGLMACLMACLMACDFiABViABViABRiwAAuwLge8PUfhAAMWYAEWYAEWYAEGrBDwaxQOMGABFmABFmABFmDACgG/R+EAAxZgARZgARZgAQasEPBnFA4wYAEWYAEWYAEWYMDK9AfjKE7QIxskVQAAAABJRU5ErkJggg==";
-
-    // Satu data laporan (field sama dengan di Firebase)
+    // Satu laporan (field sama dengan node "laporan" di Firebase)
     static class Laporan {
-        String id, judul, kategori, status, deskripsi, alamat, pelapor, fotoBase64;
-        String tanggapan = "";
-
-        Laporan(String id, String judul, String kategori, String status,
-                String deskripsi, String alamat, String pelapor, String fotoBase64) {
-            this.id = id;
-            this.judul = judul;
-            this.kategori = kategori;
-            this.status = status;
-            this.deskripsi = deskripsi;
-            this.alamat = alamat;
-            this.pelapor = pelapor;
-            this.fotoBase64 = fotoBase64;
-        }
+        String id, judul, kategori, status, deskripsi, alamat, pelapor;
+        long dibuatPada;
     }
 
     // Semua laporan, dan laporan yang tampil setelah difilter
@@ -51,6 +39,11 @@ public class DaftarLaporanActivity extends Activity {
     private String filterAktif = "semua";
     private LaporanAdapter adapter;
 
+    private DatabaseReference laporanRef;
+    private ValueEventListener listener;
+    private boolean sudahMemuat = false;
+    private String pesanError = null;
+
     private static final String[] KODE_FILTER = {"semua", "dilaporkan", "ditinjau", "diproses", "selesai"};
     private static final String[] LABEL_FILTER = {"Semua", "Dilaporkan", "Ditinjau", "Diproses", "Selesai"};
 
@@ -59,22 +52,7 @@ public class DaftarLaporanActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar_laporan);
 
-        // DATA CONTOH. Nanti bagian ini diganti dengan data dari Firebase.
-        semua.add(new Laporan("1", "Lampu jalan mati", "Infrastruktur", "dilaporkan",
-                "Lampu jalan di depan rumah nomor 12 sudah mati tiga hari, jalan jadi gelap.",
-                "Gang 3, RT 02 / RW 05", "Budi Santoso", FOTO_CONTOH));
-        semua.add(new Laporan("2", "Sampah menumpuk di gang 3", "Kebersihan", "ditinjau",
-                "Sampah belum diangkut seminggu dan mulai berbau.",
-                "Gang 3, RT 02 / RW 05", "Siti Aminah", ""));
-        semua.add(new Laporan("3", "Selokan tersumbat", "Infrastruktur", "diproses",
-                "Selokan di samping pos ronda tersumbat, air meluap saat hujan.",
-                "Dekat pos ronda, RT 03 / RW 05", "Agus Prasetyo", ""));
-        semua.add(new Laporan("4", "Pos ronda rusak", "Keamanan", "selesai",
-                "Atap pos ronda bocor dan papan lantainya lapuk.",
-                "Pos ronda RT 03", "Dewi Lestari", ""));
-        semua.add(new Laporan("5", "Jalan berlubang depan balai RT", "Infrastruktur", "dilaporkan",
-                "Lubang cukup dalam, berbahaya bagi pengendara motor saat malam.",
-                "Depan balai RT 03", "Rudi Hartono", ""));
+        laporanRef = FirebaseDatabase.getInstance().getReference("laporan");
 
         ListView list = findViewById(R.id.listLaporan);
         adapter = new LaporanAdapter();
@@ -83,7 +61,7 @@ public class DaftarLaporanActivity extends Activity {
         buatFilter();
         terapkanFilter();
 
-        // Ketuk kartu -> buka halaman detail
+        // Ketuk kartu -> buka halaman detail (foto dimuat di sana)
         list.setOnItemClickListener((parent, view, position, id) -> {
             Laporan l = tampil.get(position);
             Intent i = new Intent(DaftarLaporanActivity.this, DetailLaporanActivity.class);
@@ -94,26 +72,59 @@ public class DaftarLaporanActivity extends Activity {
             i.putExtra("deskripsi", l.deskripsi);
             i.putExtra("alamat", l.alamat);
             i.putExtra("pelapor", l.pelapor);
-            i.putExtra("foto", l.fotoBase64);
-            i.putExtra("tanggapan", l.tanggapan);
-            startActivityForResult(i, REQ_DETAIL);
+            startActivity(i);
         });
     }
 
-    // Menerima hasil dari halaman detail (status baru + tanggapan)
+    // ===== MEMBACA DATA DARI FIREBASE =====
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQ_DETAIL && resultCode == RESULT_OK && data != null) {
-            String id = data.getStringExtra("id");
-            for (Laporan l : semua) {
-                if (l.id.equals(id)) {
-                    l.status = data.getStringExtra("status");
-                    l.tanggapan = data.getStringExtra("tanggapan");
+    protected void onStart() {
+        super.onStart();
+        // Dipanggil lagi setiap data "laporan" berubah, jadi status yang baru
+        // diubah di halaman detail langsung terlihat di sini.
+        listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                semua.clear();
+                for (DataSnapshot anak : snapshot.getChildren()) {
+                    Laporan l = new Laporan();
+                    l.id = anak.getKey();
+                    l.judul = teks(anak, "judul", "(tanpa judul)");
+                    l.kategori = teks(anak, "kategori", "-");
+                    l.status = teks(anak, "status", "dilaporkan");
+                    l.deskripsi = teks(anak, "deskripsi", "-");
+                    l.alamat = teks(anak, "alamatTeks", "-");
+                    l.pelapor = teks(anak, "namaPelapor", "-");
+                    Object waktu = anak.child("dibuatPada").getValue();
+                    l.dibuatPada = (waktu instanceof Number) ? ((Number) waktu).longValue() : 0L;
+                    semua.add(l);
                 }
+                // Terbaru di atas
+                Collections.sort(semua, (a, b) -> Long.compare(b.dibuatPada, a.dibuatPada));
+                sudahMemuat = true;
+                pesanError = null;
+                terapkanFilter();
             }
-            terapkanFilter();
-        }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                pesanError = error.getMessage();
+                terapkanFilter();
+            }
+        };
+        laporanRef.addValueEventListener(listener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (listener != null) laporanRef.removeEventListener(listener);
+    }
+
+    private String teks(DataSnapshot induk, String kunci, String bawaan) {
+        String nilai = induk.child(kunci).getValue(String.class);
+        return (nilai == null || nilai.isEmpty()) ? bawaan : nilai;
     }
 
     // ===== FILTER STATUS =====
@@ -147,7 +158,23 @@ public class DaftarLaporanActivity extends Activity {
             }
         }
         adapter.notifyDataSetChanged();
-        findViewById(R.id.tvKosong).setVisibility(tampil.isEmpty() ? View.VISIBLE : View.GONE);
+
+        // Teks keadaan: memuat / gagal / kosong
+        TextView tvKosong = findViewById(R.id.tvKosong);
+        if (pesanError != null) {
+            tvKosong.setText("Gagal memuat: " + pesanError);
+            tvKosong.setVisibility(View.VISIBLE);
+        } else if (!sudahMemuat) {
+            tvKosong.setText("Memuat laporan...");
+            tvKosong.setVisibility(View.VISIBLE);
+        } else if (tampil.isEmpty()) {
+            tvKosong.setText(semua.isEmpty()
+                    ? "Belum ada laporan masuk"
+                    : "Tidak ada laporan dengan status ini");
+            tvKosong.setVisibility(View.VISIBLE);
+        } else {
+            tvKosong.setVisibility(View.GONE);
+        }
         gayaChips();
     }
 
@@ -213,7 +240,8 @@ public class DaftarLaporanActivity extends Activity {
             }
             Laporan l = tampil.get(position);
             ((TextView) convertView.findViewById(R.id.tvJudul)).setText(l.judul);
-            ((TextView) convertView.findViewById(R.id.tvKategori)).setText(l.kategori);
+            ((TextView) convertView.findViewById(R.id.tvKategori))
+                    .setText(l.kategori + "  •  " + l.pelapor);
             TextView tvStatus = convertView.findViewById(R.id.tvStatus);
             tvStatus.setText(namaStatus(l.status));
             int warna = warnaStatus(l.status);
