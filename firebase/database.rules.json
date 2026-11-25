@@ -67,7 +67,7 @@
           ".validate": "newData.isNumber()"
         },
         "status": {
-          ".validate": "newData.val() === 'dilaporkan' || newData.val() === 'ditinjau' || newData.val() === 'diproses' || newData.val() === 'selesai'"
+          ".validate": "newData.val() === 'dilaporkan' || newData.val() === 'ditinjau' || newData.val() === 'diproses' || newData.val() === 'selesai' || newData.val() === 'ditolak'"
         },
         "dibuatPada": {
           ".validate": "newData.isNumber()"
@@ -101,7 +101,7 @@
             ".validate": "newData.isString() && newData.val().length <= 1000"
           },
           "statusBaru": {
-            ".validate": "newData.val() === 'ditinjau' || newData.val() === 'diproses' || newData.val() === 'selesai'"
+            ".validate": "newData.val() === 'ditinjau' || newData.val() === 'diproses' || newData.val() === 'selesai' || newData.val() === 'ditolak'"
           },
           "dibuatPada": {
             ".validate": "newData.isNumber()"
