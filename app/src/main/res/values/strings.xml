@@ -35,4 +35,7 @@
     <string name="akun_menunggu">Akun kamu sedang menunggu verifikasi admin RT/RW.</string>
     <string name="akun_ditolak">Pendaftaran akun kamu ditolak.</string>
     <string name="akun_ditolak_alasan">Pendaftaran ditolak: %1$s</string>
+    <string name="menu_laporan">Laporan Warga</string>
+    <string name="buat_laporan">Buat Laporan Baru</string>
+    <string name="laporan_saya">Laporan Saya</string>
 </resources>

@@ -87,3 +87,7 @@ lint/tmp/
 # Pengecualian: folder bukti/ tetap dikomit walau *.log / *.xml
 !/bukti/
 !/bukti/**
+
+# Kredensial signing (JANGAN di-commit)
+keystore.properties
+*.keystore

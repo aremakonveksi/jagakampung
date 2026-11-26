@@ -39,8 +39,16 @@ public class HomeActivity extends AppCompatActivity {
         tvBadge = findViewById(R.id.tv_badge);
         progress = findViewById(R.id.progress);
         MaterialButton btnKeluar = findViewById(R.id.btn_keluar);
+        MaterialButton btnBuatLaporan = findViewById(R.id.btn_buat_laporan);
+        MaterialButton btnLaporanSaya = findViewById(R.id.btn_laporan_saya);
 
         btnKeluar.setOnClickListener(v -> keluar());
+        btnBuatLaporan.setOnClickListener(v ->
+                startActivity(new Intent(HomeActivity.this,
+                        com.jagakampung.app.warga.LaporanForm.class)));
+        btnLaporanSaya.setOnClickListener(v ->
+                startActivity(new Intent(HomeActivity.this,
+                        com.jagakampung.app.warga.LaporanSaya.class)));
 
         FirebaseUser user = auth.getCurrentUser();
         if (user == null) {
