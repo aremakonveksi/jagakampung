@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.services)
@@ -6,7 +8,7 @@ plugins {
 // Kredensial signing dibaca dari keystore.properties (tidak di-commit).
 // Kalau file tidak ada, build release jatuh ke unsigned (build debug tetap jalan).
 val keystorePropsFile = rootProject.file("keystore.properties")
-val keystoreProps = java.util.Properties()
+val keystoreProps = Properties()
 val punyaKeystore = keystorePropsFile.exists()
 if (punyaKeystore) {
     keystorePropsFile.inputStream().use { keystoreProps.load(it) }
