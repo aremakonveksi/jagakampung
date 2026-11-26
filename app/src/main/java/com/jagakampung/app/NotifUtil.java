@@ -47,7 +47,7 @@ public final class NotifUtil {
 
     /** Tampilkan notifikasi lokal. Kalau izin belum ada, diam saja (tidak crash). */
     public static void tampilkan(Context ctx, int id, String judul, String isi) {
-        if (!bolehNotif(ctx)) return;
+        if (!bolehTampil(ctx)) return;
 
         Intent buka = new Intent(ctx, LoginActivity.class);
         buka.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -71,7 +71,8 @@ public final class NotifUtil {
         }
     }
 
-    private static boolean bolehNotif(Context ctx) {
+    /** Apakah notifikasi benar-benar boleh tampil sekarang (dipakai juga oleh Worker). */
+    public static boolean bolehTampil(Context ctx) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             return ContextCompat.checkSelfPermission(ctx, Manifest.permission.POST_NOTIFICATIONS)
                     == PackageManager.PERMISSION_GRANTED;

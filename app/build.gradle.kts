@@ -24,8 +24,8 @@ android {
         applicationId = "com.jagakampung.app"
         minSdk = 23
         targetSdk = 37
-        versionCode = 2
-        versionName = "1.1"
+        versionCode = 3
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.play.services.location)
     implementation(libs.recyclerview)
+    implementation(libs.work.runtime)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)

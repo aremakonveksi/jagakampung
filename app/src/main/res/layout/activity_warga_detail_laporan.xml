@@ -73,6 +73,22 @@
             android:text="Tidak ada foto"
             android:visibility="gone" />
 
+        <TextView
+            style="@style/LpLabel"
+            android:layout_marginTop="24dp"
+            android:text="Tanggapan Admin" />
+
+        <LinearLayout
+            android:id="@+id/boxTanggapan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/tvTanggapanKosong"
+            style="@style/LpSubJudul"
+            android:text="Belum ada tanggapan dari admin." />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnKembali"
             style="@style/LpTombolOutline"

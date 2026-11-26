@@ -69,6 +69,10 @@ public class HomeActivity extends AppCompatActivity {
         // Notifikasi lokal: status laporan warga ini berubah
         notifWarga = NotifWatcher.pasangWarga(this, user);
 
+        // Pemeriksaan latar berkala (tetap jalan walau aplikasi ditutup,
+        // selama tidak di-force stop oleh sistem/user)
+        CekNotifWorker.jadwalkan(this);
+
         // Cek update sekali saat beranda dibuka (senyap)
         UpdateDialog.cekSenyap(this);
     }
@@ -119,6 +123,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void keluar() {
+        CekNotifWorker.hentikan(this);
         auth.signOut();
         kembaliKeLogin();
     }

@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +21,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class DetailLaporan extends AppCompatActivity {
 
     private TextView tvJudul, tvStatus, tvInfo, tvDeskripsi, tvLokasi, tvFotoKosong;
+    private TextView tvTanggapanKosong;
+    private LinearLayout boxTanggapan;
     private ImageView ivFoto;
 
     @Override
@@ -36,6 +43,8 @@ public class DetailLaporan extends AppCompatActivity {
         tvDeskripsi = findViewById(R.id.tvDeskripsi);
         tvLokasi = findViewById(R.id.tvLokasi);
         tvFotoKosong = findViewById(R.id.tvFotoKosong);
+        tvTanggapanKosong = findViewById(R.id.tvTanggapanKosong);
+        boxTanggapan = findViewById(R.id.boxTanggapan);
         ivFoto = findViewById(R.id.ivFoto);
         Button btnKembali = findViewById(R.id.btnKembali);
         btnKembali.setOnClickListener(v -> finish());
@@ -105,5 +114,81 @@ public class DetailLaporan extends AppCompatActivity {
                 tvFotoKosong.setVisibility(View.VISIBLE);
             }
         });
+
+        // 3. Tanggapan admin (rules: warga approved boleh membaca tanggapan)
+        root.child("tanggapan").child(id)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        tampilkanTanggapan(snapshot);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        tvTanggapanKosong.setText("Tanggapan tidak bisa dimuat: " + error.getMessage());
+                        tvTanggapanKosong.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
+
+    /** Satu tanggapan admin pada satu laporan. */
+    private static final class Item {
+        String teks;
+        String statusBaru;
+        long waktu;
+    }
+
+    private void tampilkanTanggapan(DataSnapshot snapshot) {
+        List<Item> daftar = new ArrayList<>();
+        for (DataSnapshot anak : snapshot.getChildren()) {
+            Item it = new Item();
+            it.teks = anak.child("teks").getValue(String.class);
+            it.statusBaru = anak.child("statusBaru").getValue(String.class);
+            Object w = anak.child("dibuatPada").getValue();
+            it.waktu = (w instanceof Number) ? ((Number) w).longValue() : 0L;
+            if (it.teks != null && !it.teks.isEmpty()) daftar.add(it);
+        }
+
+        boxTanggapan.removeAllViews();
+
+        if (daftar.isEmpty()) {
+            tvTanggapanKosong.setVisibility(View.VISIBLE);
+            return;
+        }
+        tvTanggapanKosong.setVisibility(View.GONE);
+
+        // Terlama di atas, terbaru di bawah (urutan percakapan)
+        Collections.sort(daftar, (a, b) -> Long.compare(a.waktu, b.waktu));
+
+        for (Item it : daftar) {
+            TextView kartu = new TextView(this);
+            String waktu = LaporanUtil.formatTanggal(it.waktu);
+            String kepala = it.statusBaru == null || it.statusBaru.isEmpty()
+                    ? waktu
+                    : labelStatus(it.statusBaru) + " • " + waktu;
+            kartu.setText(it.teks + "\n\n" + kepala);
+            kartu.setTextSize(14);
+            kartu.setTextColor(getResources().getColor(R.color.lp_text, getTheme()));
+            kartu.setBackgroundResource(R.drawable.lp_bg_card);
+            int p = dp(14);
+            kartu.setPadding(p, p, p, p);
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            lp.bottomMargin = dp(10);
+            kartu.setLayoutParams(lp);
+
+            boxTanggapan.addView(kartu);
+        }
+    }
+
+    private String labelStatus(String status) {
+        String s = status.toLowerCase(java.util.Locale.ROOT);
+        return s.substring(0, 1).toUpperCase(java.util.Locale.ROOT) + s.substring(1);
+    }
+
+    private int dp(int nilai) {
+        return Math.round(nilai * getResources().getDisplayMetrics().density);
     }
 }

@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.jagakampung.app.BuildConfig;
+import com.jagakampung.app.CekNotifWorker;
 import com.jagakampung.app.LoginActivity;
 import com.jagakampung.app.NotifUtil;
 import com.jagakampung.app.NotifWatcher;
@@ -103,6 +104,7 @@ public class DashboardActivity extends Activity {
         btnKeluar.setBackgroundColor(Color.TRANSPARENT);
         btnKeluar.setTextColor(Color.parseColor("#E5484D"));
         btnKeluar.setOnClickListener(v -> {
+            CekNotifWorker.hentikan(this);
             FirebaseAuth.getInstance().signOut();
             Intent masuk = new Intent(this, LoginActivity.class);
             masuk.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -124,6 +126,9 @@ public class DashboardActivity extends Activity {
 
         // Notifikasi lokal: ada laporan baru masuk
         notifAdmin = NotifWatcher.pasangAdmin(this);
+
+        // Pemeriksaan latar berkala
+        CekNotifWorker.jadwalkan(this);
 
         // Cek update senyap sekali saat dashboard dibuka
         UpdateDialog.cekSenyap(this);
