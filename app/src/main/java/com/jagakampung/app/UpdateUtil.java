@@ -30,9 +30,12 @@ import java.net.URL;
  */
 public final class UpdateUtil {
 
-    /** URL version.json. Ganti di satu tempat ini kalau repo kanal update berubah. */
+    /**
+     * URL version.json. Kanal update memakai repo kode ini sendiri (publik),
+     * jadi version.json + app-release.apk berada di root branch main.
+     */
     public static final String URL_VERSION =
-            "https://raw.githubusercontent.com/aremakonveksi/jagakampung-update/main/version.json";
+            "https://raw.githubusercontent.com/aremakonveksi/jagakampung/main/version.json";
 
     private static final int TIMEOUT_KONEK = 20_000;
     private static final int TIMEOUT_BACA = 60_000;
