@@ -20,8 +20,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jagakampung.app.BuildConfig;
 import com.jagakampung.app.LoginActivity;
+import com.jagakampung.app.NotifUtil;
+import com.jagakampung.app.NotifWatcher;
 import com.jagakampung.app.R;
+import com.jagakampung.app.UpdateDialog;
 
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -50,6 +54,7 @@ public class DashboardActivity extends Activity {
     private DatabaseReference root;
     private ValueEventListener pendengarLaporan;
     private ValueEventListener pendengarUsers;
+    private NotifWatcher.Pasangan notifAdmin;
 
     private LinearLayout boxKategori;
     private TextView tvBelum, tvTotalLaporan, tvWarga, tvMenunggu;
@@ -108,6 +113,20 @@ public class DashboardActivity extends Activity {
         root = FirebaseDatabase.getInstance().getReference();
         buatBarisKategori();
         pasangPendengar();
+
+        // Versi + tombol update manual
+        TextView tvVersi = findViewById(R.id.tvVersi);
+        tvVersi.setText(getString(R.string.versi_terpasang, BuildConfig.VERSION_NAME));
+        findViewById(R.id.btnUpdate).setOnClickListener(v -> UpdateDialog.cekManual(this));
+
+        NotifUtil.siapkanKanal(this);
+        NotifUtil.mintaIzin(this);
+
+        // Notifikasi lokal: ada laporan baru masuk
+        notifAdmin = NotifWatcher.pasangAdmin(this);
+
+        // Cek update senyap sekali saat dashboard dibuka
+        UpdateDialog.cekSenyap(this);
     }
 
     // ============================================================
@@ -175,6 +194,7 @@ public class DashboardActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        if (notifAdmin != null) notifAdmin.lepas();
         if (root != null) {
             if (pendengarLaporan != null) root.child("laporan").removeEventListener(pendengarLaporan);
             if (pendengarUsers != null) root.child("users").removeEventListener(pendengarUsers);

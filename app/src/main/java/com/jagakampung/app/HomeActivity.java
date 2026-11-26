@@ -24,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvSub;
     private TextView tvBadge;
     private ProgressBar progress;
+    private NotifWatcher.Pasangan notifWarga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,11 @@ public class HomeActivity extends AppCompatActivity {
         MaterialButton btnKeluar = findViewById(R.id.btn_keluar);
         MaterialButton btnBuatLaporan = findViewById(R.id.btn_buat_laporan);
         MaterialButton btnLaporanSaya = findViewById(R.id.btn_laporan_saya);
+        MaterialButton btnUpdate = findViewById(R.id.btn_update);
+        TextView tvVersi = findViewById(R.id.tv_versi);
+
+        tvVersi.setText(getString(R.string.versi_terpasang, BuildConfig.VERSION_NAME));
+        btnUpdate.setOnClickListener(v -> UpdateDialog.cekManual(this));
 
         btnKeluar.setOnClickListener(v -> keluar());
         btnBuatLaporan.setOnClickListener(v ->
@@ -50,12 +56,27 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this,
                         com.jagakampung.app.warga.LaporanSaya.class)));
 
+        NotifUtil.siapkanKanal(this);
+        NotifUtil.mintaIzin(this);
+
         FirebaseUser user = auth.getCurrentUser();
         if (user == null) {
             kembaliKeLogin();
             return;
         }
         muatProfil(user.getUid());
+
+        // Notifikasi lokal: status laporan warga ini berubah
+        notifWarga = NotifWatcher.pasangWarga(this, user);
+
+        // Cek update sekali saat beranda dibuka (senyap)
+        UpdateDialog.cekSenyap(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (notifWarga != null) notifWarga.lepas();
+        super.onDestroy();
     }
 
     private void muatProfil(String uid) {

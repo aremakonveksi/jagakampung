@@ -43,13 +43,49 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_keluar"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/logout"
             android:textAllCaps="false"
-            android:textColor="@color/teal_primary"
-            app:backgroundTint="@color/white"
-            app:cornerRadius="12dp" />
+            android:textColor="@color/white"
+            android:minWidth="0dp" />
+    </LinearLayout>
+
+    <!-- Baris versi + tombol update -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:background="@color/teal_primary">
+
+        <TextView
+            android:id="@+id/tv_versi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/teal_light"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:minWidth="0dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            android:text="@string/tombol_update"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
     </LinearLayout>
 
     <LinearLayout

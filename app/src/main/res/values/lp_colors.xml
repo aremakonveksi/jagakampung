@@ -16,5 +16,7 @@
     <color name="lp_st_diproses_bg">#E8F0FD</color>
     <color name="lp_st_selesai_fg">#2E9E5B</color>
     <color name="lp_st_selesai_bg">#E4F4EA</color>
+    <color name="lp_st_ditolak_fg">#E5484D</color>
+    <color name="lp_st_ditolak_bg">#FDEBEC</color>
     <color name="lp_overlay">#00FFFFFF</color>
 </resources>

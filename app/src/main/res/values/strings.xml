@@ -38,4 +38,25 @@
     <string name="menu_laporan">Laporan Warga</string>
     <string name="buat_laporan">Buat Laporan Baru</string>
     <string name="laporan_saya">Laporan Saya</string>
+
+    <!-- Notifikasi -->
+    <string name="kanal_notif_nama">Informasi Jaga Kampung</string>
+    <string name="kanal_notif_deskripsi">Pemberitahuan laporan baru dan tanggapan admin</string>
+    <string name="notif_laporan_baru">Laporan warga baru</string>
+    <string name="notif_status_berubah">Status laporan kamu berubah</string>
+
+    <!-- Update dalam aplikasi -->
+    <string name="tombol_update">UPDATE</string>
+    <string name="versi_terpasang">v%1$s</string>
+    <string name="judul_update_tersedia">Update tersedia</string>
+    <string name="pesan_update_tersedia">Versi baru %1$s sudah tersedia.\n\n%2$s\n\nUnduh sekarang?</string>
+    <string name="update_sedang_unduh">Mengunduh update… %1$d%%</string>
+    <string name="update_terbaru">Aplikasi sudah versi terbaru (%1$s).</string>
+    <string name="update_gagal">%1$s</string>
+    <string name="update_siap_pasang">Unduhan selesai. Ketuk Pasang untuk melanjutkan.</string>
+    <string name="update_izin_pasang">Izinkan pemasangan dari aplikasi ini, lalu coba lagi.</string>
+    <string name="tombol_unduh">Unduh</string>
+    <string name="tombol_nanti">Nanti</string>
+    <string name="tombol_pasang">Pasang</string>
+    <string name="tombol_cek_update">Cek update</string>
 </resources>

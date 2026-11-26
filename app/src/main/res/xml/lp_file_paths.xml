@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Satu root cache saja. FileProvider menolak dua root yang saling menimpa
+  ("Path ... is a prefix of another path"), jadi folder update/ ikut tercakup
+  oleh "." dan tidak didaftarkan terpisah.
+-->
 <paths>
-    <cache-path name="foto_laporan" path="." />
+    <cache-path name="cache_aplikasi" path="." />
 </paths>

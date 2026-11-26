@@ -44,8 +44,8 @@ public class DaftarLaporanActivity extends Activity {
     private boolean sudahMemuat = false;
     private String pesanError = null;
 
-    private static final String[] KODE_FILTER = {"semua", "dilaporkan", "ditinjau", "diproses", "selesai"};
-    private static final String[] LABEL_FILTER = {"Semua", "Dilaporkan", "Ditinjau", "Diproses", "Selesai"};
+    private static final String[] KODE_FILTER = {"semua", "dilaporkan", "ditinjau", "diproses", "selesai", "ditolak"};
+    private static final String[] LABEL_FILTER = {"Semua", "Dilaporkan", "Ditinjau", "Diproses", "Selesai", "Ditolak"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

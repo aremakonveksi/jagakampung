@@ -28,6 +28,8 @@ public class LaporanUtil {
                 fg = R.color.lp_st_diproses_fg; bg = R.color.lp_st_diproses_bg; label = "Diproses"; break;
             case "selesai":
                 fg = R.color.lp_st_selesai_fg; bg = R.color.lp_st_selesai_bg; label = "Selesai"; break;
+            case "ditolak":
+                fg = R.color.lp_st_ditolak_fg; bg = R.color.lp_st_ditolak_bg; label = "Ditolak"; break;
             default:
                 fg = R.color.lp_st_dilaporkan_fg; bg = R.color.lp_st_dilaporkan_bg; label = "Dilaporkan"; break;
         }

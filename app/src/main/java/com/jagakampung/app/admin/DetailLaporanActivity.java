@@ -34,7 +34,7 @@ import java.util.Map;
 public class DetailLaporanActivity extends Activity {
 
     // Status yang boleh dipilih admin (sesuai aturan database untuk tanggapan)
-    private static final String[] KODE_STATUS = {"ditinjau", "diproses", "selesai"};
+    private static final String[] KODE_STATUS = {"ditinjau", "diproses", "selesai", "ditolak"};
 
     private String idLaporan;
     private String statusPilihan = null;
@@ -233,6 +233,7 @@ public class DetailLaporanActivity extends Activity {
             case "ditinjau":  return Color.parseColor("#F2B233");
             case "diproses":  return Color.parseColor("#3B82F6");
             case "selesai":   return Color.parseColor("#2E9E5B");
+            case "ditolak":   return Color.parseColor("#E5484D");
             default:          return Color.parseColor("#9E9E9E");
         }
     }
